@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+.env
+vendor
+temp
+log
+node_modules
+www/assets
+www/manifest.json
+db/data
+db/pgdata
+db/redisdata

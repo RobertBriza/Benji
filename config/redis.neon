@@ -1,0 +1,15 @@
+extensions:
+	redis: Contributte\Redis\DI\RedisExtension
+
+redis:
+	# Setup Tracy panel
+	debug: %debugMode%
+	connection:
+		default:
+			uri: %redis.uri%
+			sessions: false
+			storage: true
+			options: ['parameters': ['database': %redis.database%]]
+
+services:
+	cache.storage: Contributte\Redis\Caching\RedisStorage

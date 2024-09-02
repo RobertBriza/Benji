@@ -1,0 +1,11 @@
+parameters:
+	default:
+		host: "{{ POSTGRES_HOST }}"
+		dbname: "{{ POSTGRES_DB }}"
+		user: "{{ POSTGRES_USER }}"
+		password: "{{ POSTGRES_PASSWORD }}"
+		port: "{{ POSTGRES_PORT }}"
+	production_mode: {{ PRODUCTION_MODE ? true : false }}
+	redis:
+		uri: {{ REDIS_DSN }}
+		database: {{ REDIS_CYCLE_DB }}

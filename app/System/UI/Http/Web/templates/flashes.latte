@@ -1,0 +1,23 @@
+{foreach $flashes as $flash}
+	{if $flash->type == 'info'}
+		<div class="flex justify-center p-4 text-sm" role="alert">
+			<span n:class="flash, $flash->type">{$flash->message}</span>
+		</div>
+	{elseif $flash->type == 'error'}
+		<div class="flex justify-center p-4 mb-4 text-sm text-red-400" role="alert">
+			<span n:class="flash, $flash->type">{$flash->message}</span>
+		</div>
+	{elseif $flash->type == 'success'}
+		<div class="flex justify-center p-4 mb-4 text-sm text-green-400" role="alert">
+			<span n:class="flash, $flash->type">{$flash->message}</span>
+		</div>
+	{elseif $flash->type == 'warning'}
+		<div class="flex justify-center p-4 mb-4 text-sm text-yellow-300" role="alert">
+			<span n:class="flash, $flash->type">{$flash->message}</span>
+		</div>
+	{else}
+		<div class="flex justify-center p-4 mb-4 text-sm" role="alert">
+			<span n:class="flash, $flash->type">{$flash->message}</span>
+		</div>
+	{/if}
+{/foreach}

@@ -1,0 +1,82 @@
+{
+	"name": "robertbriza/rally",
+	"description": "Rally by Robert Bříza",
+	"homepage": "https://www.robertbriza.cz/rally",
+	"type": "project",
+	"license": ["personal"],
+	"authors": [{ "name": "Robert Bříza" }],
+	"require": {
+		"php": "^8.3",
+		"nette/application": "^3.1",
+		"nette/bootstrap": "^3.1",
+		"nette/caching": "^3.1",
+		"nette/database": "^3.1",
+		"nette/di": "^3.0",
+		"nette/finder": "^2.5",
+		"nette/forms": "^3.1",
+		"nette/http": "^3.1",
+		"nette/mail": "^3.1",
+		"nette/robot-loader": "^3.3",
+		"nette/security": "^3.1",
+		"nette/utils": "^3.2",
+		"tracy/tracy": "^2.8",
+		"symfony/console": "^6.0",
+		"nettrine/dbal": "^0.8.1",
+		"nettrine/cache": "^0.3.0",
+		"nettrine/orm": "^0.8.4",
+		"nettrine/extensions-atlantic18": "^0.6.0",
+		"contributte/console": "^0.9.2",
+		"google/cloud-secret-manager": "^1.10",
+		"twig/twig": "^3.7",
+		"vlucas/phpdotenv": "^5.5",
+		"nettrine/migrations": "^0.9.1",
+		"nettrine/fixtures": "^0.7.2",
+		"beberlei/doctrineextensions": "dev-master",
+		"contributte/translation": "^2.0",
+		"symfony/yaml": "^6.3",
+		"phpstan/phpstan": "^1.10",
+		"phpstan/phpstan-nette": "^1.2",
+		"phpstan/extension-installer": "^1.3",
+		"symplify/phpstan-rules": "^12.4",
+		"symplify/easy-coding-standard": "^12.0",
+		"slevomat/coding-standard": "^8.14",
+		"phpmd/phpmd": "^2.13",
+		"contributte/messenger": "^0.1.0",
+		"doctrine/inflector": "^2.0",
+		"latte/latte": "^3.0",
+		"ramsey/uuid": "^4.7",
+		"ramsey/uuid-doctrine": "^2.1",
+		"cycle/orm": "^2.7",
+		"cycle/annotated": "^4.1",
+		"cycle/schema-builder": "^2.8",
+		"cycle/schema-renderer": "^1.2",
+		"cycle/entity-behavior": "^1.3",
+		"cycle/orm-promise-mapper": "^1.0",
+		"contributte/psr11-container-interface": "^0.6.0",
+		"loophp/collection": "^7.5",
+		"contributte/redis": "^0.5.4"
+	},
+	"autoload": {
+		"classmap": ["app/Bootstrap.php"]
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.7"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		}
+	},
+	"scripts": {
+		"checks": [
+			"@phpstan",
+			"@ecs",
+			"@phpmd"
+		],
+		"phpstan": "vendor/bin/phpstan analyse --memory-limit 1G",
+		"ecs": "vendor/bin/ecs check app",
+		"ecsf": "vendor/bin/ecs check app --fix",
+		"phpmd": "vendor/bin/phpmd app ansi ./ruleset.xml"
+	}
+}

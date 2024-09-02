@@ -1,0 +1,18 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+	paths:
+		- app
+	bootstrapFiles:
+		- phpstan-bootstrap.php
+	reportUnmatchedIgnoredErrors: false
+	level: 8
+
+	parallel:
+		processTimeout: 300.0
+
+	excludePaths:
+
+	ignoreErrors:
+

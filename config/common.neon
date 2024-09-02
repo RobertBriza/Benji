@@ -1,0 +1,35 @@
+parameters:
+	project: /Users/robertbriza/Work/tollerbenji
+
+application:
+	errorPresenter: Error:Error
+	catchExceptions: %productionMode%
+	mapping:
+		*: [app, *\UI\Http\Web, *Presenter]
+
+search:
+	autowired:
+		in: %appDir%
+		implements:
+		- app\System\Base\Application\Autowired
+
+session:
+	expiration: 14 days
+
+extensions:
+	resources: Contributte\DI\Extension\ResourceExtension
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+
+console:
+	name: Contributte
+	version: 0.9.2
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+tracy:
+	bar:
+		- app\System\Vite\VitePanel

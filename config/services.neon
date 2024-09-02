@@ -1,0 +1,18 @@
+services:
+	- app\System\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
+	- app\System\Base\Application\RouterFactory::createRouter
+	- app\System\Base\Application\TemplateRenderer(@twigEnvironment)
+
+	inflector: app\System\Base\Application\InflectorFactory::create()
+	configLoader:
+		factory: Twig\Loader\FilesystemLoader(%appDir%/../deploy/local)
+	twigEnvironment:
+		factory: Twig\Environment(@configLoader)
+	nette.latteFactory:
+			setup:
+					- addFilter(asset, app\System\Base\Application\AssetFilter())
+
+decorator:
+	app\System\UI\Http\Web\BasePresenter:
+		setup:
+			- setVite(@app\System\Vite\Vite)

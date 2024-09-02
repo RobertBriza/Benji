@@ -1,0 +1,27 @@
+extensions:
+	messenger: Contributte\Messenger\DI\MessengerExtension
+
+messenger:
+	debug:
+		panel: true
+	bus:
+		messageBus:
+			autowired: true
+			allowNoHandlers: false
+			allowNoSenders: true
+	transport:
+		sync:
+			dsn: sync://
+	logger:
+		httpLogger: Psr\Log\NullLogger
+		consoleLogger: Psr\Log\NullLogger
+
+services:
+	- Contributte\Messenger\Bus\QueryBus
+	- Contributte\Messenger\Bus\CommandBus
+	- app\System\Application\CQRS\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
+
+decorator:
+	\app\System\Application\CQRS\CQRSAble:
+		setup:
+			- setBusProvider(@app\System\Application\CQRS\BusProvider)

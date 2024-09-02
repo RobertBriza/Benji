@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: php
+    environment:
+      - POSTGRES_HOST=$POSTGRES_HOST
+      - POSTGRES_PORT=$POSTGRES_PORT
+    build:
+      args:
+        SECRET_DIR: $SECRET_DIR
+      context: $VOLUME_BASE_DIR
+      dockerfile: $VOLUME_BASE_DIR/.docker/php/Dockerfile
+    volumes:
+      - $VOLUME_BASE_DIR:/var/www/html
+      - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    working_dir: /var/www/html
+    depends_on:
+      - database
+
+  nginx:
+    container_name: nginx
+    build:
+      dockerfile: $VOLUME_BASE_DIR/.docker/nginx/Dockerfile
+      context: $VOLUME_BASE_DIR
+    ports:
+      - "8888:8080"
+    volumes:
+      - $VOLUME_BASE_DIR:/var/www/html
+    restart: on-failure
+    depends_on:
+      - web
+
+  database:
+    image: postgres:16.2
+    volumes:
+      - ./db/pgdata:/var/lib/postgresql/data:rw
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - ./db/redisdata:/data
