@@ -1,23 +1,30 @@
 server {
-  listen 8080 default_server;
-  server_name app.home.app;
-  root /var/www/html/www;
+	listen 8080 default_server;
+	server_name app.home.app;
+	root /var/www/html/www;
 
-  location / {
-    # try to serve file directly, fallback to index.php
-    try_files $uri /index.php$is_args$args;
-  }
+	location / {
+		# try to serve file directly, fallback to index.php
+		try_files $uri /index.php$is_args$args;
+	}
 
-  location ~ \.php(/|$) {
-    fastcgi_pass php:9000;
-    fastcgi_split_path_info ^(.+\.php)(/.*)$;
-    fastcgi_index index.php;
-    include fastcgi_params;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    fastcgi_param PATH_INFO $fastcgi_path_info;
-  }
+	location /cdn/ {
+		alias /var/www/html/www/assets/images/;
+		autoindex on;
+		access_log off;
+		expires max;
+	}
 
-  location ~ \.php$ {
-    return 404;
-  }
+	location ~ \.php(/|$) {
+		fastcgi_pass php:9000;
+		fastcgi_split_path_info ^(.+\.php)(/.*)$;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
+	}
+
+	location ~ \.php$ {
+		return 404;
+	}
 }

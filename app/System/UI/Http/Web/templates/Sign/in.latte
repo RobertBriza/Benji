@@ -1,5 +1,14 @@
 {layout ../@layout.latte}
 {block content}
-<title n:inner-block=title>Sign In</title>
-{control signInForm}
-<p class="text-center"><a n:href="up">Don't have an account yet? Sign up.</a></p>
+<title n:inner-block=title>Přihlášení</title>
+<div class="flex justify-center">
+	<div class="text-white bg-black bg-opacity-40 w-1/2 rounded-md mt-5">
+		<div class="mt-5 flex justify-center rounded-lg">
+			{control signInForm}
+		</div>
+		<p class="text-center pt-10 pb-5">
+			<u><a n:href="up">Ještě nemáte účet? Vytvořte si ho zde</a></u>
+		</p>
+	</div>
+</div>
+

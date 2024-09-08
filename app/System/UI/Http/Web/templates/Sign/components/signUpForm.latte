@@ -1,34 +1,33 @@
-
-<div class="bg-slate-700 p-3 mt-3 w-1/2 flex flex-col items-center self-center justify-center rounded-lg">
-	<form n:name=signUpForm class="flex flex-col items-center justify-center" data-naja-history="off">
-		<div class="grid grid-cols-1 gap-3 my-16">
-			<div class="grid grid-cols-3 justify-between gap-5">
-				<div class="pt-10">
-					<label n:name="first_name">Jméno</label>
-					<input n:name=first_name class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
-				</div>
-				<div class="pt-10">
-					<label n:name=last_name>Příjmení</label>
-					<input n:name=last_name class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
-				</div>
-				<div class="pt-10">
-					<label n:name=email>Email</label>
-					<input n:name=email class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
-				</div>
-				<div class="pt-10">
-					<label n:name=password>Heslo</label>
-					<input n:name="password" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password">
-				</div>
-				<div class="pt-10">
-					<label n:name=password_repeat>Ověření hesla</label>
-					<input n:name="password_repeat" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password">
-				</div>
-			</div>
+<form n:name=signUpForm class="flex flex-col m-10 items-center justify-center" data-naja-history="off">
+	<div class="grid grid-cols-2 justify-between gap-5 pt-5">
+		<div>
+			<label n:name="first_name">Jméno</label>
+			<input n:name=first_name class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
 		</div>
-		<div class="mt-4">
-			<label>
-				<input n:name=send class="text-white bg-slate-800 font-bold py-5 px-10 rounded hover:bg-slate-900 cursor-pointer">
-			</label>
+		<div>
+			<label n:name=last_name>Příjmení</label>
+			<input n:name=last_name class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
 		</div>
-	</form>
-</div>
+	</div>
+	<div class="w-full gap-5 pt-10">
+		<div>
+			<label n:name=email>Email</label>
+			<input n:name=email class="appearance-none block w-full rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
+		</div>
+	</div>
+	<div class="grid grid-cols-2 justify-between gap-5 pt-10">
+		<div>
+			<label n:name=password>Heslo</label>
+			<input n:name="password" class="appearance-none block w-full rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password">
+		</div>
+		<div>
+			<label n:name=password_repeat>Ověření hesla</label>
+			<input n:name="password_repeat" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="password">
+		</div>
+	</div>
+	<div class="pt-20">
+		<label>
+			<input n:name=send class="text-white bg-slate-800 font-bold py-5 px-10 rounded hover:bg-slate-900 cursor-pointer">
+		</label>
+	</div>
+</form>
