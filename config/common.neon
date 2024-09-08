@@ -20,6 +20,8 @@ extensions:
 	resources: Contributte\DI\Extension\ResourceExtension
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 
+latte:
+	templateClass: \app\System\UI\Http\Web\Template\PageTemplate
 
 console:
 	name: Contributte

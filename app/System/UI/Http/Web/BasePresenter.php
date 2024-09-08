@@ -6,7 +6,7 @@ namespace app\System\UI\Http\Web;
 
 use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
-use app\System\UI\Http\Web\Template\BaseTemplate;
+use app\System\UI\Http\Web\Template\PageTemplate;
 use app\System\Vite\Vite;
 use Contributte;
 use Nette\Application\Helpers;
@@ -14,7 +14,7 @@ use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Presenter;
 
 /**
- * @property-read BaseTemplate $template
+ * @property PageTemplate $template
  */
 abstract class BasePresenter extends Presenter implements CQRSAble
 {
@@ -57,7 +57,7 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	{
 		[, $presenter] = Helpers::splitName((string) $this->getName());
 
-		$layout = $this->layout ?: 'layout';
+		$layout = $this->getLayout() ?: 'layout';
 
 		$dir = dirname((string) static::getReflection()->getFileName());
 		$dir = is_dir(sprintf('%s/templates', $dir)) ? $dir : dirname($dir);
@@ -69,5 +69,28 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 		}
 
 		return $list;
+	}
+
+	protected function getUrlWithoutUtmParameters(): string
+	{
+		$urlScript = $this->getHttpRequest()->getUrl();
+		$urlParameters = $urlScript->getQueryParameters();
+		$urlParameterKeys = array_keys($urlParameters);
+
+		foreach ($urlParameterKeys as $key) {
+			if (! preg_match("'^utm\_'si", (string) $key)) {
+				continue;
+			}
+
+			unset($urlParameters[$key]);
+		}
+
+		$paramQuery = http_build_query($urlParameters);
+
+		if ($paramQuery !== '') {
+			return $urlScript->getPath() . '?' . $paramQuery;
+		}
+
+		return $urlScript->getPath();
 	}
 }
