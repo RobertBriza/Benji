@@ -40,6 +40,7 @@ class Bootstrap
 			->register();
 
 		define('__APP_DIR__', __DIR__);
+		define('__WWW_DIR__', __DIR__ . '/../www/');
 
 		$resultDir = $_ENV["SECRET_DIR"];
 

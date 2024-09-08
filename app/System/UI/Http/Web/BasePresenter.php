@@ -9,6 +9,7 @@ use app\System\Application\CQRS\CQRSAble;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use app\System\Vite\Vite;
 use Contributte;
+use Nette\Application\Helpers;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Presenter;
 
@@ -46,7 +47,27 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	{
 		parent::startup();
 		$this->getSession()->start();
-
 		$this->template->vite = $this->vite;
+	}
+
+	/**
+	 * @return array<int, string>
+	 */
+	public function formatLayoutTemplateFiles(): array
+	{
+		[, $presenter] = Helpers::splitName((string) $this->getName());
+
+		$layout = $this->layout ?: 'layout';
+
+		$dir = dirname((string) static::getReflection()->getFileName());
+		$dir = is_dir(sprintf('%s/templates', $dir)) ? $dir : dirname($dir);
+
+		$list = [sprintf('%s/templates/%s/%s.latte', $dir, $presenter, $layout)];
+
+		if (defined('__WWW_DIR__')) {
+			$list[] = __WWW_DIR__ . '/templates/' . $layout . '.latte';
+		}
+
+		return $list;
 	}
 }

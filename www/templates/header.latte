@@ -9,6 +9,7 @@
 			<a n:if="$user->getIdentity() === null" n:href=":System:Sign:in">In</a>
 			<a n:if="$user->getIdentity() === null" n:href=":System:Sign:up">Up</a>
 			<a n:if="$user->getIdentity() instanceof Nette\Security\SimpleIdentity" n:href=":System:Sign:out">Out</a>
+			<a n:href=":Article:Article:list">Blog</a>
 			<a href="/cdn/IMG_.png" onclick="window.location.href='/cdn/IMG_8007.jpeg'; return false;">Doggo</a>
 		</div>
 	</nav>
