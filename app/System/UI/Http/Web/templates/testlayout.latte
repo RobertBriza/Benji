@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title n:snippet="title" n:inner-block="title">Nette Web</title>
+	{if $vite !== null && $vite->isEnabled()}
+		<script type="module" src="{='@vite/client'|asset}"></script>
+	{/if}
+
+	<script src="{='src/scripts/main.js'|asset}" type="module"></script>
+	<link rel="stylesheet" href="{='src/styles/main.css'|asset}">
+</head>
+
+<body data-controller="body" class="bg-[url('/cdn/IMG_8007.jpeg')] bg-cover bg-top bg-fixed">
+<div class="flex g flex-col h-screen">
+	<div n:snippet="header">
+		{include $baseTemplatePath . '/header.latte'}
+	</div>
+	<div n:snippet="flashes" class="fixed top-16 left-0 w-full z-50" data-naja-snippet-append>
+		{include $baseTemplatePath . '/flashes.latte'}
+	</div>
+	<div n:inner-block="content" n:snippet="content" class="container mainContent overflow-hidden"></div>
+
+	<footer class="mt-auto">
+		{include $baseTemplatePath . '/header.latte'}
+	</footer>
+</div>
+{block scripts}{/block}
+</body>
+</html>

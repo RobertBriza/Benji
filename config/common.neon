@@ -21,7 +21,7 @@ extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 
 latte:
-	templateClass: \app\System\UI\Http\Web\Template\PageTemplate
+	templateClass: \app\System\UI\Http\Web\Template\BaseTemplate
 
 console:
 	name: Contributte

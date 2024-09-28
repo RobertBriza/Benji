@@ -6,7 +6,7 @@ namespace app\System\UI\Http\Web;
 
 use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
-use app\System\UI\Http\Web\Template\PageTemplate;
+use app\System\UI\Http\Web\Template\BaseTemplate;
 use app\System\Vite\Vite;
 use Contributte;
 use Nette\Application\Helpers;
@@ -14,7 +14,7 @@ use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Presenter;
 
 /**
- * @property PageTemplate $template
+ * @property BaseTemplate $template
  */
 abstract class BasePresenter extends Presenter implements CQRSAble
 {
@@ -60,15 +60,22 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 		$layout = $this->getLayout() ?: 'layout';
 
 		$dir = dirname((string) static::getReflection()->getFileName());
-		$dir = is_dir(sprintf('%s/templates', $dir)) ? $dir : dirname($dir);
 
-		$list = [sprintf('%s/templates/%s/%s.latte', $dir, $presenter, $layout)];
-
-		if (defined('__WWW_DIR__')) {
-			$list[] = __WWW_DIR__ . '/templates/' . $layout . '.latte';
+		$presenterLayout = sprintf('%s/templates/%s/%s.latte', $dir, $presenter, $layout);
+		if (file_exists($presenterLayout)) {
+			return [$presenterLayout];
 		}
 
-		return $list;
+		$templatesLayout = sprintf('%s/templates/%s.latte', $dir, $layout);
+		if (file_exists($templatesLayout)) {
+			return [$templatesLayout];
+		}
+
+		if (defined('__WWW_DIR__')) {
+			return [__WWW_DIR__ . '/templates/' . $layout . '.latte'];
+		}
+
+		return [];
 	}
 
 	protected function getUrlWithoutUtmParameters(): string
