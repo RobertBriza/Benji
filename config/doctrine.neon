@@ -5,6 +5,10 @@ services:
 		class: \app\System\User\Domain\Repository\UserRepository
 		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\System\User\Domain\Entity\User)
 
+	-
+		class: \app\Emailing\Domain\Repository\SendgridEmailRepository
+		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Emailing\Domain\Entity\SendgridEmail)
+
 extensions:
 	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
 	nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
@@ -22,6 +26,7 @@ extensions:
 orm.annotations:
 	mapping:
 		app\System\User\Domain\Entity: %appDir%/System/User/Domain/Entity
+		app\Emailing\Domain\Entity: %appDir%/Emailing/Domain/Entity
 
 nettrine.orm:
 	configuration:

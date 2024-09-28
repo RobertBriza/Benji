@@ -13,7 +13,7 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="app\System\User\Domain\Repository\UserRepository")
- * @ORM\Table(name="user_table")
+ * @ORM\Table(name="user")
  */
 class User extends Entity
 {
