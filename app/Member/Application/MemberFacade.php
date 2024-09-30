@@ -2,25 +2,26 @@
 
 declare(strict_types=1);
 
-namespace app\System\User\Application;
+namespace app\User\Application;
 
 use app\System\Base\Application\Autowired;
-use app\System\User\Domain\Entity\User;
-use app\System\User\Domain\Repository\UserRepository;
-use DateTimeImmutable;
+use app\Member\Domain\Entity\Member;
+use app\Member\Domain\Repository\MemberRepository;
+use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Nette;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
 use Ramsey\Uuid\Uuid;
+use stdClass;
 
 /**
  * Manages user-related operations such as authentication and adding new users.
  */
-final class UserFacade implements Nette\Security\Authenticator, Autowired
+final class MemberFacade implements Nette\Security\Authenticator, Autowired
 {
 
 	public function __construct(
-		private readonly UserRepository $repository,
+		private readonly MemberRepository $repository,
 		private readonly Passwords $passwords,
 	) {
 	}
@@ -29,7 +30,7 @@ final class UserFacade implements Nette\Security\Authenticator, Autowired
 		$userEntity = $this->repository->findOneBy(['email' => $user]);
 
 		// Authentication checks
-		if ($userEntity instanceof User === false) {
+		if ($userEntity instanceof Member === false) {
 			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IdentityNotFound);
 		}
 
@@ -46,23 +47,22 @@ final class UserFacade implements Nette\Security\Authenticator, Autowired
 		return new SimpleIdentity(id: $userEntity->id->toString(), roles: null, data: $userEntity->toArray());
 	}
 
-	public function add(\stdClass $data): void
+	public function add(stdClass $data): void
 	{
 		Nette\Utils\Validators::assert($data->email, 'email');
 
 		try {
-			$user = new User;
+			$user = new Member;
 			$user->firstName = $data->first_name;
 			$user->lastName = $data->last_name;
 			$user->email = $data->email;
 			$user->password = $this->passwords->hash($data->password);
 			$user->hash = Uuid::uuid4();
-			$user->createDate = new DateTimeImmutable;
 
 			$this->repository->entityManager()->persist($user);
 			$this->repository->entityManager()->flush();
-		} catch (Nette\Database\UniqueConstraintViolationException) {
-			throw new DuplicateNameException;
+		} catch (SyntaxErrorException $e) {
+			bdump($e);
 		}
 	}
 }

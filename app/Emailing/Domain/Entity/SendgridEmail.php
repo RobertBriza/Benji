@@ -27,4 +27,9 @@ class SendgridEmail extends DateTimeLoggableEntity
 	 * @ORM\Column(type="json",nullable=true,options={"jsonb"=true})
 	 */
 	public mixed $replacing;
+
+	public function sendgridId(): string
+	{
+		return 'd-' . str_replace('-', '', $this->id->toString());
+	}
 }

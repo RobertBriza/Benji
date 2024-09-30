@@ -2,8 +2,8 @@ services:
 	- Doctrine\DBAL\Platforms\PostgreSQLPlatform
 
 	-
-		class: \app\System\User\Domain\Repository\UserRepository
-		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\System\User\Domain\Entity\User)
+		class: \app\Member\Domain\Repository\MemberRepository
+		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Member\Domain\Entity\Member)
 
 	-
 		class: \app\Emailing\Domain\Repository\SendgridEmailRepository
@@ -25,7 +25,7 @@ extensions:
 
 orm.annotations:
 	mapping:
-		app\System\User\Domain\Entity: %appDir%/System/User/Domain/Entity
+		app\Member\Domain\Entity: %appDir%/Member/Domain/Entity
 		app\Emailing\Domain\Entity: %appDir%/Emailing/Domain/Entity
 
 nettrine.orm:

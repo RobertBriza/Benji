@@ -10,7 +10,6 @@ use app\Emailing\Domain\Repository\SendgridEmailRepository;
 use app\System\Base\Application\Autowired;
 use Exception;
 use Nette\Utils\Json;
-use Ramsey\Uuid\Uuid;
 use SendGrid;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -53,7 +52,7 @@ final class SaveEmailTemplateHandler implements Autowired
 				'template_id' => $template->sendgridId(),
 				'active' => 1,
 				'name' => $template->name . ' Version 1',
-				'subject' => 'Product Review',
+				'subject' => $command->name,
 				'html_content' => $command->htmlContent,
 				'plain_content' => strip_tags($command->htmlContent),
 			];

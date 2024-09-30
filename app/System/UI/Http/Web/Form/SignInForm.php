@@ -7,15 +7,10 @@ use app\System\UI\Http\Web\SignPresenter;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 use Nette\Security\AuthenticationException;
-use Nette\Security\User;
 
 /** @property SignPresenter $presenter */
 class SignInForm extends BaseControl
 {
-	public function __construct(private readonly User $user)
-	{
-	}
-
 	public function formSucceeded(Form $form, \stdClass $data): void
 	{
 		try {

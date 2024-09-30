@@ -1,6 +1,6 @@
 <?php
 
-namespace app\System\User\Application;
+namespace app\User\Application;
 
 class DuplicateNameException extends \Exception
 {

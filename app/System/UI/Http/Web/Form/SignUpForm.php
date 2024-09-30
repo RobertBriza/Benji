@@ -2,14 +2,17 @@
 
 namespace app\System\UI\Http\Web\Form;
 
+use app\Emailing\Application\Command\SendRegisteredEmail;
+use app\Emailing\Domain\Entity\SendgridEmail;
+use app\Emailing\Domain\Enum\EmailType;
+use app\Member\Domain\Entity\Member;
+use app\System\Application\Query\GetEntity;
 use app\System\UI\Http\Web\Control\BaseControl;
 use app\System\UI\Http\Web\SignPresenter;
-use app\System\User\Application\DuplicateNameException;
-use app\System\User\Application\UserFacade;
+use app\User\Application\DuplicateNameException;
+use app\User\Application\MemberFacade;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
-use Nette\Security\AuthenticationException;
-use Nette\Security\User;
 
 /** @property SignPresenter $presenter */
 class SignUpForm extends BaseControl
@@ -17,7 +20,7 @@ class SignUpForm extends BaseControl
 	public const PasswordMinLength = 7;
 
 	public function __construct(
-		private readonly UserFacade $userFacade,
+		private readonly MemberFacade $userFacade,
 	)
 	{
 	}
@@ -26,6 +29,9 @@ class SignUpForm extends BaseControl
 	{
 		try {
 			$this->userFacade->add($data);
+			$sendgridEmail = $this->sendQuery(new GetEntity(SendgridEmail::class, ['name' => EmailType::MemberRegistration->getName()]));
+			$user = $this->sendQuery(new GetEntity(Member::class, ['email' => $data->email]));
+			$this->sendCommand(new SendRegisteredEmail($sendgridEmail, $user));
 			$this->redirect(':System:Sign:in');
 		} catch (DuplicateNameException) {
 			$form['email']->addError('Email is already registered.');
