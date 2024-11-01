@@ -17,5 +17,5 @@ jobs:
         uses: php-actions/composer@v6
       - name: Ensure logging directory exists
         run: |
-          cd $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/app/log
           ls -a
