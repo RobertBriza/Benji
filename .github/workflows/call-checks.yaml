@@ -9,8 +9,9 @@ jobs:
       - run: |
           echo $GITHUB_SHA
           echo $GITHUB_REF
-          echo $env:GITHUB_REPOSITORY
-          echo $env:GITHUB_WORKSPACE
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
       - name: Ensure logging directory exists
         run:
-          cd $GITHUB_WORKSPACE/app/log
+          cd $GITHUB_WORKSPACE
+          ls -a
