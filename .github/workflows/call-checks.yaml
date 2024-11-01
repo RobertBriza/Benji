@@ -10,11 +10,13 @@ jobs:
         uses: shivammathur/setup-php@2.31.1
       - name: Checkout
         uses: actions/checkout@v4
-      - name: PHPMD run
+      - name: PHP Mess Detector install
+        uses: php-actions/phpmd@v1
+      - name: PHP Mess Detector run
         run: composer phpmd
       - name: Composer install
         uses: php-actions/composer@v6
-      - name: Ecs run
+      - name: Easy coding standards run
         run: composer ecs
       - name: Phpstan install
         uses: php-actions/phpstan@v3
