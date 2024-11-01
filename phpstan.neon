@@ -3,7 +3,7 @@ includes:
 
 parameters:
 	paths:
-		- app
+		- ./app
 	bootstrapFiles:
 		- phpstan-bootstrap.php
 	reportUnmatchedIgnoredErrors: false
