@@ -16,6 +16,7 @@ jobs:
           php_version: 8.3
           path: app/
           ruleset: ruleset.xml
+          output: github
       - name: PHP Mess Detector run
         run: composer phpmd
       - name: Composer install
