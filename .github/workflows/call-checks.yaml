@@ -13,6 +13,6 @@ jobs:
       - name: Phpstan install
         uses: php-actions/phpstan@v3
         with:
-          configuration: phpstan.neon
+          path: ./
       - name: Phpstan run
         run: composer phpstan
