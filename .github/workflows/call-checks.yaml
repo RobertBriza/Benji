@@ -10,20 +10,18 @@ jobs:
         uses: shivammathur/setup-php@2.31.1
       - name: Checkout
         uses: actions/checkout@v4
-      - name: PHP Mess Detector install
+      - name: Composer install
+        uses: php-actions/composer@v6
+      - name: Phpstan install
+        uses: php-actions/phpstan@v3
+      - name: Phpstan run
+        run: composer phpstan
+      - name: Easy coding standards run
+        run: composer ecs
+      - name: PHP Mess Detector run
         uses: php-actions/phpmd@v1
         with:
           php_version: 8.3
           path: app/
           ruleset: ruleset.xml
           output: github
-      - name: PHP Mess Detector run
-        run: composer phpmd
-      - name: Composer install
-        uses: php-actions/composer@v6
-      - name: Easy coding standards run
-        run: composer ecs
-      - name: Phpstan install
-        uses: php-actions/phpstan@v3
-      - name: Phpstan run
-        run: composer phpstan
