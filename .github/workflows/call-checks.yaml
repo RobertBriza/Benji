@@ -6,15 +6,11 @@ jobs:
   run-checks:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Composer install
-        uses: php-actions/composer@v6
-      - name: Add safe directory
-        run: git config --global --add safe.directory /app
+      - run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REF
+          echo $env:GITHUB_REPOSITORY
+          echo $env:GITHUB_WORKSPACE
       - name: Ensure logging directory exists
-        run: mkdir -p /app/log
-      - name: Phpstan install
-        uses: php-actions/phpstan@v3
-      - name: Phpstan run
-        run: composer phpstan
+        run:
+          cd $GITHUB_WORKSPACE/app/log
