@@ -10,7 +10,6 @@ final readonly class GetEntity
 		public string $entityClass,
 		public array $criteria = [],
 		public ?array $orderBy = null,
-	)
-	{
+	) {
 	}
 }

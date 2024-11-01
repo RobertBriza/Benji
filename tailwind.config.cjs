@@ -35,7 +35,17 @@ module.exports = {
   safelist: [
     'border-green-500',
     'border-yellow-500',
-    'border-red-500'
+    'border-red-500',
+    'text-red-400',
+    'text-green-400',
+    'text-yellow-300',
+    'text-sm',
+    'py-2',
+    'px-10',
+    'top-10',
+    'w-6',
+    'h-6',
+    'space-x-4'
   ],
   plugins: [],
 }

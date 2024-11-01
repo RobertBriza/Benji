@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\System\UI\Http\Web\Form;
 
+use app\Member\UI\Http\Web\SignPresenter;
 use app\System\UI\Http\Web\Control\BaseControl;
-use app\System\UI\Http\Web\SignPresenter;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 use Nette\Security\AuthenticationException;
@@ -25,7 +27,7 @@ class SignInForm extends BaseControl
 
 	protected function createComponentSignInForm(): IComponent
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addText('email', 'Email:')
 			->setRequired('Please enter your username.');
 
@@ -40,7 +42,7 @@ class SignInForm extends BaseControl
 
 	public function create(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		if ($this->presenter->getUser()->isLoggedIn()) {
 			$form->addProtection();
 		}

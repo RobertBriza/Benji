@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\Article\UI\Http\Web\Template;
 
 use Nette\Bridges\ApplicationLatte\Template;

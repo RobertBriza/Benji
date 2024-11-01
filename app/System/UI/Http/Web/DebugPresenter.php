@@ -22,6 +22,8 @@ class DebugPresenter extends BasePresenter
 
 	public function actionEntity(): void
 	{
-		dumpe($this->sendQuery(new GetEntity(Member::class, ['hash' => Uuid::fromString('6fc96bb2-32bb-478e-a0fc-175cdaa6ad26')])));
+		dumpe($this->sendQuery(new GetEntity(Member::class, [
+			'hash' => Uuid::fromString('6fc96bb2-32bb-478e-a0fc-175cdaa6ad26'),
+		])));
 	}
 }

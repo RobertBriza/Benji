@@ -42,7 +42,7 @@ final readonly class SendRegisteredEmailHandler implements Autowired
 
 			$statusCode = $response->statusCode();
 
-			if ($statusCode !== 201) {
+			if (in_array($statusCode, [200, 201, 202], true) === false) {
 				throw new Exception('Email not sent');
 			}
 		} catch (Exception $e) {

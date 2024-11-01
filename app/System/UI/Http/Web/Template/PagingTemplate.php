@@ -9,7 +9,6 @@ use Nette\Utils\Paginator;
 
 final class PagingTemplate extends Template
 {
-
 	/** @param int[] $steps */
 	public function __construct(
 		public Paginator $paginator,
@@ -19,5 +18,4 @@ final class PagingTemplate extends Template
 		public ?string $type = null,
 	) {
 	}
-
 }

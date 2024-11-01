@@ -21,7 +21,6 @@ final readonly class SendgridTemplateVersionDTO
 		public string $thumbnailUrl,
 		public SendgridTemplateReplacingDTO $replacing,
 	) {
-
 	}
 
 	/** @param array<string, mixed> $data */

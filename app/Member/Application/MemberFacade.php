@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace app\User\Application;
 
-use app\System\Base\Application\Autowired;
 use app\Member\Domain\Entity\Member;
 use app\Member\Domain\Repository\MemberRepository;
+use app\System\Base\Application\Autowired;
 use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Nette;
 use Nette\Security\Passwords;
@@ -19,15 +19,17 @@ use stdClass;
  */
 final class MemberFacade implements Nette\Security\Authenticator, Autowired
 {
-
 	public function __construct(
 		private readonly MemberRepository $repository,
 		private readonly Passwords $passwords,
 	) {
 	}
+
 	public function authenticate(string $user, string $password): SimpleIdentity
 	{
-		$userEntity = $this->repository->findOneBy(['email' => $user]);
+		$userEntity = $this->repository->findOneBy([
+			'email' => $user,
+		]);
 
 		// Authentication checks
 		if ($userEntity instanceof Member === false) {
@@ -52,7 +54,7 @@ final class MemberFacade implements Nette\Security\Authenticator, Autowired
 		Nette\Utils\Validators::assert($data->email, 'email');
 
 		try {
-			$user = new Member;
+			$user = new Member();
 			$user->firstName = $data->first_name;
 			$user->lastName = $data->last_name;
 			$user->email = $data->email;

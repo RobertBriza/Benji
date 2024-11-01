@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\System\UI\Http\Web\Form;
 
 use app\Emailing\Application\Command\SendRegisteredEmail;
 use app\Emailing\Domain\Entity\SendgridEmail;
 use app\Emailing\Domain\Enum\EmailType;
 use app\Member\Domain\Entity\Member;
+use app\Member\UI\Http\Web\SignPresenter;
 use app\System\Application\Query\GetEntity;
 use app\System\UI\Http\Web\Control\BaseControl;
-use app\System\UI\Http\Web\SignPresenter;
-use app\User\Application\DuplicateNameException;
 use app\User\Application\MemberFacade;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 
@@ -21,26 +23,29 @@ class SignUpForm extends BaseControl
 
 	public function __construct(
 		private readonly MemberFacade $userFacade,
-	)
-	{
+	) {
 	}
 
 	public function formSucceeded(Form $form, \stdClass $data): void
 	{
 		try {
 			$this->userFacade->add($data);
-			$sendgridEmail = $this->sendQuery(new GetEntity(SendgridEmail::class, ['name' => EmailType::MemberRegistration->getName()]));
-			$user = $this->sendQuery(new GetEntity(Member::class, ['email' => $data->email]));
+			$sendgridEmail = $this->sendQuery(new GetEntity(SendgridEmail::class, [
+				'name' => EmailType::MemberRegistration->getName(),
+			]));
+			$user = $this->sendQuery(new GetEntity(Member::class, [
+				'email' => $data->email,
+			]));
 			$this->sendCommand(new SendRegisteredEmail($sendgridEmail, $user));
-			$this->redirect(':System:Sign:in');
-		} catch (DuplicateNameException) {
-			$form['email']->addError('Email is already registered.');
+			$this->presenter->redirect(':System:Homepage:default');
+		} catch (UniqueConstraintViolationException) {
+			$this->presenter->flashMessage('Email is already registered.', 'warning');
 		}
 	}
 
 	protected function createComponentSignUpForm(): IComponent
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addText('first_name')
 			->setRequired('Please pick a username.');
 		$form->addText('last_name', 'Pick a last name:')
@@ -68,7 +73,7 @@ class SignUpForm extends BaseControl
 	 */
 	public function create(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 
 		if ($this->presenter->getUser()->isLoggedIn()) {
 			$form->addProtection();

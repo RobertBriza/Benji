@@ -17,13 +17,13 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class SaveEmailTemplateHandler implements Autowired
 {
 	public function __construct(
-		private SendgridEmailRepository $repository
+		private SendgridEmailRepository $repository,
 	) {
 	}
 
 	public function __invoke(SaveEmailTemplate $command): void
 	{
-		$sg = new SendGrid('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');
+		$sg = new SendGrid('XXX');
 
 		$templateData = [
 			'name' => $command->name,
@@ -40,7 +40,7 @@ final class SaveEmailTemplateHandler implements Autowired
 
 			$template = SendgridTemplateDTO::fromArray(Json::decode($response->body(), Json::FORCE_ARRAY));
 
-			$sendgridEmail = new SendgridEmail;
+			$sendgridEmail = new SendgridEmail();
 			$sendgridEmail->id = $template->id;
 			$sendgridEmail->name = $template->name;
 			$sendgridEmail->replacing = $template->currentVersion?->replacing->toArray() ?? [];

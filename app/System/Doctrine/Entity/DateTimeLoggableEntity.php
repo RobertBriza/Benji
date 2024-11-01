@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\System\Domain\Entity;
 
 use DateTimeImmutable;
@@ -9,8 +11,8 @@ class DateTimeLoggableEntity extends Entity
 {
 	public function __construct()
 	{
-		$this->setCreatedAtValue();
-		$this->setUpdatedAtValue();
+		$this->setCreatedAt();
+		$this->setUpdatedAt();
 	}
 
 	/**
@@ -28,14 +30,15 @@ class DateTimeLoggableEntity extends Entity
 	 */
 	public ?DateTimeImmutable $removedAt = null;
 
-	public function setCreatedAtValue(): void
+	public function setCreatedAt(): void
 	{
 		if ($this->createdAt === null) {
 			$this->createdAt = new DateTimeImmutable();
 		}
 	}
 
-	public function setUpdatedAtValue(): void
+	/** @ORM\PostPersist */
+	public function setUpdatedAt(): void
 	{
 		$this->updatedAt = new DateTimeImmutable();
 	}

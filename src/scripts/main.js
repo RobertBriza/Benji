@@ -19,38 +19,6 @@ naja.addEventListener('error', (event) => {
   console.log(`Error ${error.response.status}: ${error.response.statusText} at ${error.response.url}`)
 })
 
-naja.snippetHandler.addEventListener('afterUpdate', (event) => {
-
-  const {snippet} = event.detail
-
-  function fadeOutAndHide(element) {
-    element.querySelectorAll('div').forEach(div => {
-      if (div.classList.contains('bg-slate-700')) {
-        return
-      }
-
-      div.classList.add('bg-slate-700')
-
-      setTimeout(() => {
-
-        div.classList.add('animate-fade')
-
-        function handleAnimationEnd() {
-          div.remove()
-          div.removeEventListener('animationend', handleAnimationEnd)
-        }
-
-        // Add an event listener for when the animation ends
-        div.addEventListener('animationend', handleAnimationEnd, {once: true})
-      }, 3000)
-    })
-  }
-
-  if (snippet.id === 'snippet--flashes') {
-    fadeOutAndHide(snippet)
-  }
-})
-
 window.naja = naja;
 
 const LibStimulus = new Application(document.documentElement)

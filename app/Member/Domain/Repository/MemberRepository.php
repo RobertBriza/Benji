@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\Member\Domain\Repository;
 
-use app\System\Domain\Repository\BaseRepository;
 use app\Member\Domain\Entity\Member;
+use app\System\Domain\Repository\BaseRepository;
 
 /**
  * @extends BaseRepository<Member>

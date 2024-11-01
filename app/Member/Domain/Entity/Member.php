@@ -11,7 +11,10 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="app\Member\Domain\Repository\MemberRepository")
- * @ORM\Table(name="member")
+ * @ORM\Table(
+ *   name="member",
+ *   uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", fields={"email"})}
+ * )
  */
 class Member extends DateTimeLoggableEntity
 {

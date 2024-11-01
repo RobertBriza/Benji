@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\Emailing\Domain\Entity;
 
 use app\System\Domain\Entity\DateTimeLoggableEntity;
