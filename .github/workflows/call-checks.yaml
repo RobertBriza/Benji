@@ -12,6 +12,6 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
       - name: Ensure logging directory exists
-        run:
+        run: |
           cd $GITHUB_WORKSPACE
           ls -a
