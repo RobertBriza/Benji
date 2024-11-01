@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace app\System\User\Domain\Entity;
+namespace app\Member\Domain\Entity;
 
-
-use app\System\Domain\Entity\Entity;
-use DateTimeImmutable;
+use app\System\Domain\Entity\DateTimeLoggableEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="app\System\User\Domain\Repository\UserRepository")
- * @ORM\Table(name="user_table")
+ * @ORM\Entity(repositoryClass="app\Member\Domain\Repository\MemberRepository")
+ * @ORM\Table(
+ *   name="member",
+ *   uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", fields={"email"})}
+ * )
  */
-class User extends Entity
+class Member extends DateTimeLoggableEntity
 {
 	/**
 	 * @ORM\Id
@@ -61,11 +62,6 @@ class User extends Entity
 	 */
 	public UuidInterface $hash;
 
-	/**
-	 * @ORM\Column(type="date_immutable")
-	 */
-	public DateTimeImmutable $createDate;
-
 	public function toArray(): array
 	{
 		return [
@@ -76,7 +72,8 @@ class User extends Entity
 			'isConfirmed' => $this->isConfirmed,
 			'isAdmin' => $this->isAdmin,
 			'hash' => $this->hash,
-			'createDate' => $this->createDate,
+			'createdAt' => $this->createdAt,
+			'updatedAt' => $this->updatedAt,
 		];
 	}
 }

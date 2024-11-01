@@ -19,7 +19,6 @@ final class ArticlePresenter extends BasePresenter
 
 	private int $page = 1;
 
-
 	public function renderList(): void
 	{
 		$list = [];

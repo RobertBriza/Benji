@@ -14,19 +14,20 @@
 </head>
 
 <body data-controller="body">
-	<div class="flex g flex-col h-screen bg-cover bg-center" style="background-image: url('/cdn/IMG_8007.jpeg');">
-		<div n:snippet="header">
-			{include header.latte}
-		</div>
-		<div n:snippet="flashes" class="fixed top-16 left-0 w-full z-50" data-naja-snippet-append>
-			{include flashes.latte}
-		</div>
-		<div n:inner-block="content" n:snippet="content" class="container mainContent overflow-hidden"></div>
-
-		<footer class="mt-auto">
-			{include footer.latte}
-		</footer>
+<div class="flex g flex-col h-screen bg-cover bg-center" style="background-image: url('/cdn/IMG_8007.jpeg');">
+	<header n:snippet="header" class="flex-none bg-black bg-opacity-40 text-white">
+		{include header.latte}
+	</header>
+	<div n:snippet="flashes" class="fixed top-10 left-0 w-full bg-slate-700 z-50" data-naja-snippet-append>
+		{include flashes.latte}
 	</div>
-	{block scripts}{/block}
+
+	<div n:inner-block="content" n:snippet="content" class="container overflow-hidden"></div>
+
+	<footer class="mt-auto">
+		{include footer.latte}
+	</footer>
+</div>
+{block scripts}{/block}
 </body>
 </html>

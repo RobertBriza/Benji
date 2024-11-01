@@ -8,7 +8,6 @@ use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use app\System\Vite\Vite;
-use Contributte;
 use Nette\Application\Helpers;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Presenter;
@@ -37,7 +36,9 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	protected function getPost(): mixed
 	{
 		if (json_validate($this->getHttpRequest()->getRawBody()) === false) {
-			$this->sendResponse(new JsonResponse(['response' => 'Invalid JSON']));
+			$this->sendResponse(new JsonResponse([
+				'response' => 'Invalid JSON',
+			]));
 		}
 
 		return json_decode($this->getHttpRequest()->getRawBody(), true);

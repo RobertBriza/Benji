@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace app\System\Domain\Entity;
 
-use app\System\Domain\Exception\PropertyNotSet;
 use LogicException;
 use Ramsey\Uuid\UuidInterface;
 

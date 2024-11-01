@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\System\UI\Http\Web\Template;
 
 use app\System\Vite\Vite;
-use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\InvalidStateException;
 use Nette\Security\User;
 use Nette\Utils\Arrays;

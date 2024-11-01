@@ -1,0 +1,7 @@
+name: Manual Checks
+on:
+  workflow_dispatch:
+
+jobs:
+  manual-checks:
+    uses: ./.github/workflows/call-checks.yaml
