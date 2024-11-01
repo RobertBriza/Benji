@@ -6,7 +6,6 @@ namespace app;
 
 use app\System\Base\Application\TemplateRenderer;
 use Dotenv\Dotenv;
-use Dotenv\Exception\InvalidPathException;
 use Nette\Bootstrap\Configurator;
 use RuntimeException;
 use Twig\Environment;
@@ -22,14 +21,6 @@ class Bootstrap
 
 		$productionMode = true;
 		$resultDir = __DIR__ . '/temp';
-
-		if (file_exists($appDir . '.env') === true) {
-			$dotenv = Dotenv::createImmutable($appDir);
-			$dotenv->load();
-
-			$productionMode = (bool) $_ENV['PRODUCTION_MODE'];
-			$resultDir = $_ENV['SECRET_DIR'];
-		}
 
 		$configurator->setDebugMode($productionMode === false);
 
