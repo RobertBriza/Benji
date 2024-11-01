@@ -12,5 +12,7 @@ jobs:
         uses: php-actions/composer@v6
       - name: Phpstan install
         uses: php-actions/phpstan@v3
+        with:
+          configuration: phpstan.neon
       - name: Phpstan run
         run: composer phpstan
