@@ -62,6 +62,7 @@ class Member extends DateTimeLoggableEntity
 	 */
 	public UuidInterface $hash;
 
+	/** @return array<string, mixed> */
 	public function toArray(): array
 	{
 		return [

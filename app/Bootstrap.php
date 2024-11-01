@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app;
 
 use app\System\Base\Application\TemplateRenderer;
-use Dotenv\Dotenv;
 use Nette\Bootstrap\Configurator;
 use RuntimeException;
 use Twig\Environment;
@@ -19,10 +18,10 @@ class Bootstrap
 		$configurator = new Configurator();
 		$appDir = dirname(__DIR__);
 
-		$productionMode = true;
+		$productionMode = $_ENV['PRODUCTION_MODE'] ?? true;
 		$resultDir = __DIR__ . '/temp';
 
-		$configurator->setDebugMode($productionMode === false);
+		$configurator->setDebugMode($productionMode);
 
 		if (isset($_COOKIE['nette-debug']) && $_COOKIE['nette-debug'] === '1') {
 			$configurator->setDebugMode(true);

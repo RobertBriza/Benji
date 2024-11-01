@@ -7,8 +7,14 @@ namespace app\Emailing\Domain\DTO;
 use DateTimeImmutable;
 use Nette\Utils\Json;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ */
 final readonly class SendgridTemplateVersionDTO
 {
+	/**
+	 * @param array<string, mixed> $testData
+	 */
 	public function __construct(
 		public string $id,
 		public string $templateId,

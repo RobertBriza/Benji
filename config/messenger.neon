@@ -19,9 +19,9 @@ messenger:
 services:
 	- Contributte\Messenger\Bus\QueryBus
 	- Contributte\Messenger\Bus\CommandBus
-	- app\System\Application\CQRS\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
+	- app\System\CQRS\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
 
 decorator:
-	\app\System\Application\CQRS\CQRSAble:
+	\app\System\CQRS\CQRSAble:
 		setup:
-			- setBusProvider(@app\System\Application\CQRS\BusProvider)
+			- setBusProvider(@app\System\CQRS\BusProvider)

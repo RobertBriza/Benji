@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\System\UI\Http\Web;
 
-use app\System\Application\CQRS\CQRS;
-use app\System\Application\CQRS\CQRSAble;
+use app\System\CQRS\CQRS;
+use app\System\CQRS\CQRSAble;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use app\System\Vite\Vite;
 use Nette\Application\Helpers;
@@ -35,13 +35,19 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 	protected function getPost(): mixed
 	{
-		if (json_validate($this->getHttpRequest()->getRawBody()) === false) {
+		$rawBody = $this->getHttpRequest()->getRawBody();
+
+		if ($rawBody === null) {
+			return null;
+		}
+
+		if (json_validate($rawBody) === false) {
 			$this->sendResponse(new JsonResponse([
 				'response' => 'Invalid JSON',
 			]));
 		}
 
-		return json_decode($this->getHttpRequest()->getRawBody(), true);
+		return json_decode($rawBody, true);
 	}
 
 	protected function startup(): void

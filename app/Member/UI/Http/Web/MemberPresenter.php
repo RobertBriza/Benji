@@ -14,7 +14,7 @@ final class MemberPresenter extends BasePresenter
 {
 	public function actionVerify(string $hash): void
 	{
-		/** @var Member $member */
+		/** @var ?Member $member */
 		$member = $this->sendQuery(new GetEntity(Member::class, [
 			'hash' => $hash,
 			'isConfirmed' => false,

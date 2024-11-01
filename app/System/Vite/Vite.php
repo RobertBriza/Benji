@@ -28,22 +28,27 @@ class Vite
 		$asset = '';
 		$baseUrl = '/';
 
-		if (! $this->isEnabled()) {
+		if ($this->isEnabled() === false) {
 			if (file_exists($this->manifestFile)) {
 				$manifest = Json::decode(FileSystem::read($this->manifestFile), Json::FORCE_ARRAY);
 				$asset = $manifest[$entrypoint]['file'];
-			} else {
-				trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
+
+				return $baseUrl . $asset;
 			}
-		} else {
-			$baseUrl = $this->viteServer . '/';
-			$asset = $entrypoint;
+
+			trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
+
+			return $baseUrl . $asset;
 		}
+
+		$baseUrl = $this->viteServer . '/';
+		$asset = $entrypoint;
 
 		return $baseUrl . $asset;
 	}
 
 	/**
+	 * @return string[]
 	 * @throws JsonException
 	 */
 	public function getCssAssets(string $entrypoint): array
@@ -57,21 +62,19 @@ class Vite
 				foreach ($manifest[$entrypoint]['css'] ?? [] as $asset) {
 					$assets[] = $baseUrl . $asset;
 				}
-			} else {
-				trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
+
+				return $assets;
 			}
+
+			trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
 		}
 
-		return $assets;
+		return [];
 	}
 
 	public function isEnabled(): bool
 	{
-		if (! $this->productionMode && $this->httpRequest->getCookie('netteVite') === 'true') {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->productionMode === false && $this->httpRequest->getCookie('netteVite') === 'true';
 	}
 
 	/**

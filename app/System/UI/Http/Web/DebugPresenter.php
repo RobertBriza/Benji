@@ -15,6 +15,11 @@ class DebugPresenter extends BasePresenter
 	public function actionCreate(): void
 	{
 		$htmlContent = file_get_contents(__DIR__ . '/template.html');
+
+		if ($htmlContent === false) {
+			$this->sendResponse(new TextResponse('Error'));
+		}
+
 		$name = 'Registrace člena';
 		$this->sendCommand(new SaveEmailTemplate($name, $htmlContent));
 		$this->sendResponse(new TextResponse($name . ' Ok'));

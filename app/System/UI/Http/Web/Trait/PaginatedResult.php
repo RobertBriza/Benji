@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BG\System\UI\Http\Web;
+namespace app\System\UI\Http\Web\Trait;
 
 use app\System\UI\Http\Web\Control\PagingControl;
 use Nette\Http\IRequest;

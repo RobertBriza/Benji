@@ -8,7 +8,7 @@ use app\Article\UI\Http\Web\Template\ArticleListTemplate;
 use app\System\UI\Http\Web\BasePresenter;
 
 use app\System\UI\Http\Web\Control\PagingControl;
-use BG\System\UI\Http\Web\PaginatedResult;
+use app\System\UI\Http\Web\Trait\PaginatedResult;
 use Nette\Utils\Paginator;
 
 final class ArticlePresenter extends BasePresenter
@@ -34,6 +34,9 @@ final class ArticlePresenter extends BasePresenter
 		$this->template->list = $list;
 	}
 
+	/**
+	 * @param array<string, mixed> $list
+	 */
 	private function createTemplateParams(
 		array $list,
 		Paginator $paginator,

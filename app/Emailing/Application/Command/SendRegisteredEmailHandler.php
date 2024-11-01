@@ -6,6 +6,7 @@ namespace app\Emailing\Application\Command;
 
 use app\System\Base\Application\Autowired;
 use Exception;
+use Ramsey\Uuid\UuidInterface;
 use SendGrid;
 use SendGrid\Mail\Mail;
 use SendGrid\Mail\Personalization;
@@ -32,6 +33,10 @@ final readonly class SendRegisteredEmailHandler implements Autowired
 		];
 
 		foreach ($dynamicData as $key => $value) {
+			if ($value instanceof UuidInterface) {
+				$value = $value->toString();
+			}
+
 			$personalization->addSubstitution(new Substitution($key, $value));
 		}
 
