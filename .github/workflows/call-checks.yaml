@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Composer install
-        uses: php-actions/composer@v6 # or alternative dependency management
+        uses: php-actions/composer@v6
       - name: Ensure logging directory exists
         run: mkdir -p /app/log
       - name: Phpstan install
