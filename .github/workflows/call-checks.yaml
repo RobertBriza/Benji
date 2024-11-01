@@ -6,16 +6,11 @@ jobs:
   run-checks:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo $GITHUB_SHA
-          echo $GITHUB_REF
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v4
       - name: Composer install
         uses: php-actions/composer@v6
-      - name: Ensure logging directory exists
-        run: |
-          cd $GITHUB_WORKSPACE/app/log
-          ls -a
+      - name: Phpstan install
+        uses: php-actions/phpstan@v3
+      - name: Phpstan run
+        run: composer phpstan
