@@ -11,6 +11,10 @@ jobs:
           echo $GITHUB_REF
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Composer install
+        uses: php-actions/composer@v6
       - name: Ensure logging directory exists
         run: |
           cd $GITHUB_WORKSPACE
