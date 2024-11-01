@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 jobs:
-  checks:
+  run-checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
