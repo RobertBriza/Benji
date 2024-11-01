@@ -13,7 +13,7 @@ jobs:
       - name: Composer install
         uses: php-actions/composer@v6
       - name: Ecs run
-        run: vendor/bin/ecs
+        run: composer ecs
       - name: Phpstan install
         uses: php-actions/phpstan@v3
       - name: Phpstan run
