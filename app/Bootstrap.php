@@ -19,10 +19,18 @@ class Bootstrap
 		$configurator = new Configurator();
 		$appDir = dirname(__DIR__);
 
-		$dotenv = Dotenv::createImmutable($appDir);
-		$dotenv->load();
+		try {
+			$dotenv = Dotenv::createImmutable($appDir . '/../');
+			$dotenv->load();
 
-		$configurator->setDebugMode((bool) $_ENV['PRODUCTION_MODE'] === false);
+			$productionMode = (bool) $_ENV['PRODUCTION_MODE'];
+			$resultDir = $_ENV['SECRET_DIR'];
+		} catch (\Throwable $e) {
+			$productionMode = true;
+			$resultDir = __DIR__ . '/temp';
+		}
+
+		$configurator->setDebugMode($productionMode === false);
 
 		if (isset($_COOKIE['nette-debug']) && $_COOKIE['nette-debug'] === '1') {
 			$configurator->setDebugMode(true);
@@ -41,8 +49,6 @@ class Bootstrap
 
 		define('__APP_DIR__', __DIR__);
 		define('__WWW_DIR__', __DIR__ . '/../www/');
-
-		$resultDir = $_ENV["SECRET_DIR"];
 
 		self::renderSecrets($resultDir);
 
