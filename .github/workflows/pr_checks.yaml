@@ -1,0 +1,10 @@
+name: Pull Request Checks
+on:
+  pull_request:
+    types: [opened, assigned, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  manual-checks:
+    uses: ./.github/workflows/call-checks.yaml

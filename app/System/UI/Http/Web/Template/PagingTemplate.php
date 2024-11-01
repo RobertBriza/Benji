@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BG\Eshop\System\UI\Http\Web\Template;
+namespace app\System\UI\Http\Web\Template;
 
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Paginator;

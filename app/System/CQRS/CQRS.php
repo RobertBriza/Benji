@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\System\Application\CQRS;
+namespace app\System\CQRS;
 
 trait CQRS
 {

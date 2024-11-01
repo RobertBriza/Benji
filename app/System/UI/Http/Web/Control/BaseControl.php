@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\System\UI\Http\Web\Control;
 
-use app\System\Application\CQRS\CQRS;
-use app\System\Application\CQRS\CQRSAble;
+use app\System\CQRS\CQRS;
+use app\System\CQRS\CQRSAble;
 use Nette\Application\UI\Control;
 use Nette\Bridges\ApplicationLatte\DefaultTemplate;
 use Nette\FileNotFoundException;

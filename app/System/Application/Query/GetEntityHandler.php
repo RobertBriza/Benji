@@ -19,6 +19,10 @@ final readonly class GetEntityHandler implements Autowired
 	public function __invoke(GetEntity $query): ?Entity
 	{
 		$repository = $this->em->getRepository($query->entityClass);
-		return $repository->findOneBy($query->criteria, $query->orderBy);
+
+		/** @var Entity|null $entity */
+		$entity = $repository->findOneBy($query->criteria, $query->orderBy);
+
+		return $entity;
 	}
 }

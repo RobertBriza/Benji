@@ -6,6 +6,11 @@ namespace app\System\Application\Query;
 
 final readonly class GetEntity
 {
+	/**
+	 * @param class-string<object> $entityClass
+	 * @param array<string, mixed> $criteria
+	 * @param array<string, string>|null $orderBy
+	 */
 	public function __construct(
 		public string $entityClass,
 		public array $criteria = [],

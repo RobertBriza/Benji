@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\System\Domain\Repository;
 
+use app\System\Doctrine\Repository\T;
 use app\System\Domain\Entity\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;

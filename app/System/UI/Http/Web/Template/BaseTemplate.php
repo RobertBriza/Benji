@@ -15,7 +15,6 @@ use Nette\Utils\Arrays;
 final class BaseTemplate extends Template
 {
 	public Control $control;
-	public array $flashes = [];
 	public Presenter $presenter;
 	public User $user;
 	public Vite $vite;
@@ -31,6 +30,7 @@ final class BaseTemplate extends Template
 		return $this;
 	}
 
+	/** @param array<int|string, mixed> $params */
 	public function render(?string $file = null, array $params = []): void
 	{
 		$this->user = $this->presenter->user;

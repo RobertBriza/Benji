@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\System\UI\Http\Web\Control;
 
-use BG\Eshop\System\UI\Http\Web\Template\PagingTemplate;
+use app\System\UI\Http\Web\Template\PagingTemplate;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Paginator;
 
@@ -143,23 +143,22 @@ final class PagingControl extends BaseControl
 	/**
 	 * @param array<int, mixed> $args
 	 */
-	public function render(...$args): void // phpcs:ignore
+	public function render(...$args): void
 	{
-		$this->renderControl($this->createPagingTemplate($args));
+		//$this->renderControl($this->createPagingTemplate($args));
 	}
 
 	/**
 	 * @param array<int, mixed> $args
 	 */
-	public function renderToString(...$args): string // phpcs:ignore
+	public function renderToString(...$args): string
 	{
-		return (string) $this->renderControl($this->createPagingTemplate($args), true);
+		return "";
+		//return (string) $this->renderControl($this->createPagingTemplate($args), true);
 	}
 
-	/**
-	 * @param array<int, mixed> $args
-	 */
-	private function createPagingTemplate(...$args): PagingTemplate // phpcs:ignore
+
+	/**private function createPagingTemplate(...$args): PagingTemplate // phpcs:ignore
 	{
 		$options = $args[0][0] ?? [];
 		$paginator = $this->getPaginator();
@@ -189,5 +188,5 @@ final class PagingControl extends BaseControl
 			$steps,
 			$type,
 		);
-	}
+	}*/
 }

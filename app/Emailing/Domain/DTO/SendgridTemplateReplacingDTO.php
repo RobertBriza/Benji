@@ -6,6 +6,10 @@ namespace app\Emailing\Domain\DTO;
 
 final readonly class SendgridTemplateReplacingDTO
 {
+	/**
+	 * @param array<int, mixed> $variables
+	 * @param array<string, mixed> $cycles
+	 */
 	public function __construct(public array $variables, public array $cycles)
 	{
 	}
@@ -44,7 +48,7 @@ final readonly class SendgridTemplateReplacingDTO
 		return new self($variables, $cycles);
 	}
 
-	/** @return array<string, array<string, mixed>> */
+	/** @return array<string, mixed> */
 	public function toArray(): array
 	{
 		return [

@@ -9,6 +9,7 @@ use Nette\Utils\Paginator;
 
 final class ArticleListTemplate extends Template
 {
+	/** @param array<string, mixed> $list */
 	public function __construct(
 		public array $list,
 		public Paginator $paginator,

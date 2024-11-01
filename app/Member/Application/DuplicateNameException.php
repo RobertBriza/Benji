@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\User\Application;
+namespace app\Member\Application;
 
 class DuplicateNameException extends \Exception
 {
