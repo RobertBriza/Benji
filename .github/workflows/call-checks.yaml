@@ -15,8 +15,5 @@ jobs:
           ls -a
       - name: Phpstan install
         uses: php-actions/phpstan@v3
-        with:
-          configuration: $GITHUB_WORKSPACE/phpstan.neon
-          path: $GITHUB_WORKSPACE
       - name: Phpstan run
         run: composer phpstan

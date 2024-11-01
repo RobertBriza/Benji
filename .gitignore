@@ -3,7 +3,6 @@
 .env
 vendor
 temp
-log
 !app/log
 node_modules
 www/manifest.json
