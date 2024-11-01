@@ -6,6 +6,8 @@ jobs:
   run-checks:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.31.1
       - name: Checkout
         uses: actions/checkout@v4
       - name: Composer install
