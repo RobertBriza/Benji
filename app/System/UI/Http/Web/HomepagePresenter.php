@@ -6,4 +6,5 @@ namespace app\System\UI\Http\Web;
 
 final class HomepagePresenter extends BasePresenter
 {
+
 }
